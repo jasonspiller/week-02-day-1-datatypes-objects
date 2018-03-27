@@ -154,3 +154,35 @@ for (let i = 0; i < bondFilms.length; i++) {
 }
 
 console.log('$' + totalGross.toLocaleString());
+
+
+//Console log the single movie object that contains the actor who starred in the least number of films.
+function actorFrequency(array){
+
+	// create an object that contains each unique value and increments it
+	var count = {};
+	array.forEach(function(i) {
+		var actor = i.actor;
+		count[actor] = count[actor] ? count[actor] + 1 : 1;
+	});
+
+	// create a new array from object
+	let sorted = [];
+	for (let actors in count) {
+		sorted.push([actors, count[actors]]);
+	}
+
+	// sort new array
+	sorted.sort(function(a, b) {
+		return a[1] - b[1];
+	});
+
+	// loop through film array and match first value in sorted array
+	for (let i = 0; i < array.length; i++) {
+		if (sorted[0][0] === array[i].actor) {
+			return bondFilms[i];
+		}
+	}
+}
+
+console.log(actorFrequency(bondFilms));
